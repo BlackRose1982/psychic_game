@@ -1,0 +1,72 @@
+<html>
+	<head>
+		<title>Psychic Game</title>
+	</head>
+	<body>
+		<h1>PSYCHIC GAME</h1>
+		<p>Guess What Letter I am thinking of?</p>
+		<p>wins: <span id="wins">0</span></p>
+		<p>Losses: <span id="losses">0</span></p>
+		<p>Guesses Left: <span id="guesses_left">9</span></p>
+		<p>Your Guesses so far: <span id="your_guesses_so_far"></span></p>
+
+		<script type="text/javascript">
+			var letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+			var letterToGuess = letters[Math.floor(Math.random()*letters.length)];
+			var wins = 0;
+			var losses = 0;
+			var guesses_left = 9;
+			var letterGuessed = '';
+			var lettersGuessed = [];
+			
+			document.onkeyup = function(event) {
+				// console.log("Hi");
+				// console.log(event.keyCode);
+				// console.log(event.code);
+				letterGuessed = String.fromCharCode(event.keyCode).toLowerCase();
+				console.log(letterGuessed);
+
+				//put letterGuessed inside of the list lettersGuessed
+				lettersGuessed.push(letterGuessed);
+				
+
+				if (letterGuessed == letterToGuess){
+					console.log('you win');
+					wins = wins + 1;
+					guesses_left = 9;
+					letterGuessed = "";
+					lettersGuessed = [];
+					letterToGuess = letters[Math.floor(Math.random()*letters.length)];
+
+				}else{
+					console.log('guess again');
+					guesses_left = guesses_left - 1;
+					
+				};
+
+
+				if (guesses_left == 0){
+
+					losses = losses + 1;
+					console.log('game over');
+					guesses_left = 9;
+					letterGuessed = "";
+					lettersGuessed = [];
+					letterToGuess = letters[Math.floor(Math.random()*letters.length)];
+
+				}
+
+
+
+					
+				console.log('your wins: ' + wins);
+				console.log('your losses: ' + losses);
+				console.log('guesses_left: ' + guesses_left);
+				document.querySelector('#wins').innerHTML = wins;
+				document.querySelector('#losses').innerHTML = losses;
+				document.querySelector('#guesses_left').innerHTML = guesses_left;
+				document.querySelector('#your_guesses_so_far').innerHTML = lettersGuessed;
+			}
+		</script>
+	</body>
+</html>
